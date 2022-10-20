@@ -1,25 +1,19 @@
-$(document).ready(function() {
-    $("nav ul li a").click(function(){
-        $(".isi").slideToggle("slow");
+$(document).ready(function(){
+  $('.Besti').click(function(){
+      let isi = $(this).text();
+      let tid = $(this).prop('id');
+      let rid = tid.split('__');
+      let id_baris = rid[1];
+      let mhsw = $('#mhsw__'+id_baris).text();
 
-	$('nav ul li.inactive').each(function(index, el) {
-		var isiID = el.id.split('-')[1];
-		$('.isi#' + isiID).hide();
-	});
-});
+      if(isi=='Delete'){
+          let konfirmasi = confirm(`Yakin mau menghapus ${mhsw} ??`);
+          if(!konfirmasi) return;
 
-$('nav').delegate('.inactive', 'click', function(event) {
-	var pilihIsi = this.id.split('-')[1];
-	console.log(pilihIsi);
-	document.location.hash = pilihIsi;
+          $('#garis__'+id_baris).fadeOut();
 
-	$('.isi:visible').fadeOut('slow', function() {
-		$('.isi#' + pilihIsi).fadeIn('slow');
-	});
-
-	var $this = $(this);
-	$this.removeClass('inactive').addClass("active");
-    $this.siblings().addClass('inactive').removeClass('active');
-
-    });
-});
+      }else{
+          alert("Anda berada di kolom : " + $(this).html() + "!");
+      }
+  })
+})
